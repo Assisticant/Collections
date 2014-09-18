@@ -6,12 +6,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Itzben="clr-namespace:Itzben;assembly=Itzben"
         Title="Collections" Height="350" Width="525"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Locator}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <Window.Resources>
         <Converters:EnumConverter x:Key="EnumConverter"/>
         <DataTemplate x:Key="ItemHeaderTemplate">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Content="" IsChecked="{Binding Checked}"/>
                 <TextBlock Text="{Binding Name}"/>
             </StackPanel>
         </DataTemplate>
@@ -32,12 +31,6 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock Text="Order By:" Margin="10,10,10,0" Foreground="#FF8F8F8F"/>
-                <ComboBox Margin="10" SelectedIndex="{Binding Order, Converter={StaticResource EnumConverter}}" >
-                    <System:String>Name</System:String>
-                    <System:String>Quantity</System:String>
-                    <System:String>Price</System:String>
-                </ComboBox>
                 <TextBlock Text="Items:" Margin="10,10,10,0" Foreground="#FF8F8F8F"/>
             </StackPanel>
 
@@ -50,24 +43,6 @@
         <StackPanel DataContext="{Binding ItemDetail}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" Grid.Column="1">
             <TextBlock TextWrapping="Wrap" Text="Name:" Margin="10,10,10,0" Foreground="#FF8F8F8F"/>
             <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Name}" Margin="10"/>
-            <TextBlock TextWrapping="Wrap" Text="Quantity:" Margin="10,10,10,0" Foreground="#FF8F8F8F"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox TextWrapping="Wrap" Text="{Binding Quantity}" Margin="10"/>
-                <Grid Grid.Column="1" Margin="10,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Button Content="+" Width="30" Command="{Binding Increment}"/>
-                    <Button Content="-" Grid.Row="1" Width="30" Command="{Binding Decrement}"/>
-                </Grid>
-            </Grid>
-            <TextBlock TextWrapping="Wrap" Text="Price:" Margin="10,10,10,0" Foreground="#FF8F8F8F"/>
-            <TextBox Height="23" TextWrapping="Wrap" Text="{Binding Price}" Margin="10"/>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
             <Button Content="New" Width="75" Margin="10" Height="25" Command="{Binding AddItem}"/>
