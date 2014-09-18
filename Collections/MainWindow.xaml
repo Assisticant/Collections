@@ -47,6 +47,8 @@
         <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
             <Button Content="New" Width="75" Margin="10" Height="25" Command="{Binding AddItem}"/>
             <Button Content="Delete" Width="75" Margin="10" Height="25" Command="{Binding DeleteItem}"/>
+            <Button Content="Up" Width="75" Margin="10" Height="25" Command="{Binding MoveItemUp}"/>
+            <Button Content="Down" Width="75" Margin="10" Height="25" Command="{Binding MoveItemDown}"/>
         </StackPanel>
 
     </Grid>
