@@ -1,0 +1,9 @@
+﻿<Window x:Class="Collections.HelloWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Greeting" Height="300" Width="300"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Hello}">
+    <Grid>
+        <TextBlock Text="{Binding Greeting}" FontSize="32" />
+    </Grid>
+</Window>

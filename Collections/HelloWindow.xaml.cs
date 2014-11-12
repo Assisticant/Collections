@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Collections
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HelloWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HelloWindow : Window
     {
-        public MainWindow()
+        public HelloWindow()
         {
             InitializeComponent();
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            new HelloWindow().Show();
         }
     }
 }

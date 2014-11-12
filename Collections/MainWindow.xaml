@@ -6,6 +6,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:Itzben="clr-namespace:Itzben;assembly=Itzben"
         Title="Collections" Height="350" Width="525"
+        Loaded="MainWindow_Loaded"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <Window.Resources>
         <Converters:EnumConverter x:Key="EnumConverter"/>
