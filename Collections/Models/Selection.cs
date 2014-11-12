@@ -5,12 +5,12 @@ namespace Collections.Models
 {
     public class Selection
     {
-        private Observable<Item> _selectedItem = new Observable<Item>();
+        private Observable<Person> _selectedPerson = new Observable<Person>();
 
-        public Item SelectedItem
+        public Person SelectedPerson
         {
-            get { return _selectedItem; }
-            set { _selectedItem.Value = value; }
+            get { return _selectedPerson; }
+            set { _selectedPerson.Value = value; }
         }
     }
 }

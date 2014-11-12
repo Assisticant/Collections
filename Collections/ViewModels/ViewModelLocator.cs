@@ -10,54 +10,54 @@ namespace Collections.ViewModels
 {
     public class ViewModelLocator : ViewModelLocatorBase
     {
-        private Document _document;
+        private AddressBook _addressBook;
 		private Selection _selection;
 
         public ViewModelLocator()
         {
 			if (DesignMode)
-				_document = LoadDesignModeDocument();
+				_addressBook = LoadDesignModeAddressBook();
 			else
-				_document = LoadDocument();
+				_addressBook = LoadAddressBook();
 			_selection = new Selection();
         }
 
         public object Main
         {
-            get { return ViewModel(() => new MainViewModel(_document, _selection)); }
+            get { return ViewModel(() => new MainViewModel(_addressBook, _selection)); }
         }
 
-		public object Item
+		public object Person
 		{
 			get
 			{
-				return ViewModel(() => _selection.SelectedItem == null
+				return ViewModel(() => _selection.SelectedPerson == null
 					? null
-					: new ItemViewModel(_selection.SelectedItem));
+					: new PersonViewModel(_selection.SelectedPerson));
 			}
 		}
 
-		private Document LoadDocument()
+		private AddressBook LoadAddressBook()
 		{
 			// TODO: Load your document here.
-            Document document = new Document();
-            var one = document.NewItem();
-            one.Name = "One";
-            var two = document.NewItem();
-            two.Name = "Two";
-            var three = document.NewItem();
-            three.Name = "Three";
+            AddressBook document = new AddressBook();
+            var one = document.NewPerson();
+            one.Name = "Larry";
+            var two = document.NewPerson();
+            two.Name = "Moe";
+            var three = document.NewPerson();
+            three.Name = "Curly";
             return document;
 		}
 
-		private Document LoadDesignModeDocument()
+		private AddressBook LoadDesignModeAddressBook()
 		{
-            Document document = new Document();
-            var one = document.NewItem();
+            AddressBook document = new AddressBook();
+            var one = document.NewPerson();
             one.Name = "Design";
-            var two = document.NewItem();
+            var two = document.NewPerson();
             two.Name = "Mode";
-            var three = document.NewItem();
+            var three = document.NewPerson();
             three.Name = "Data";
             return document;
 		}

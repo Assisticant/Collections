@@ -5,34 +5,34 @@ using Collections.Models;
 
 namespace Collections.ViewModels
 {
-    public class ItemViewModel
+    public class PersonViewModel
     {
-        private readonly Item _item;
+        private readonly Person _person;
 
-        public ItemViewModel(Item item)
+        public PersonViewModel(Person person)
         {
-            _item = item;
+            _person = person;
         }
 
         public string Name
         {
-            get { return _item.Name; }
-            set { _item.Name = value; }
+            get { return _person.Name; }
+            set { _person.Name = value; }
         }
 
         public override bool Equals(object obj)
         {
             if (obj == this)
                 return true;
-            ItemViewModel that = obj as ItemViewModel;
+            PersonViewModel that = obj as PersonViewModel;
             if (that == null)
                 return false;
-            return Object.Equals(this._item, that._item);
+            return Object.Equals(this._person, that._person);
         }
 
         public override int GetHashCode()
         {
-            return _item.GetHashCode();
+            return _person.GetHashCode();
         }
     }
 }

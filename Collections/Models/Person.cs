@@ -7,7 +7,7 @@ using Assisticant.Fields;
 
 namespace Collections.Models
 {
-    public class Item
+    public class Person
     {
         private Observable<string> _name = new Observable<string>();
 

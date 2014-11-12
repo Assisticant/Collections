@@ -11,102 +11,102 @@ namespace Collections.ViewModels
 {
     public class MainViewModel
     {
-        private readonly Document _document;
+        private readonly AddressBook _addressBook;
 		private readonly Selection _selection;
 
-        public MainViewModel(Document document, Selection selection)
+        public MainViewModel(AddressBook addressBook, Selection selection)
         {
-            _document = document;
+            _addressBook = addressBook;
 			_selection = selection;
         }
 
-        public IEnumerable<ItemHeader> Items
+        public IEnumerable<PersonHeader> People
         {
             get
             {
                 return
-                    from item in _document.Items
-                    select new ItemHeader(item);
+                    from person in _addressBook.People
+                    select new PersonHeader(person);
             }
         }
 
-        public ItemHeader SelectedItem
+        public PersonHeader SelectedPerson
         {
             get
             {
-                return _selection.SelectedItem == null
+                return _selection.SelectedPerson == null
                     ? null
-                    : new ItemHeader(_selection.SelectedItem);
+                    : new PersonHeader(_selection.SelectedPerson);
             }
             set
             {
                 if (value != null)
-                    _selection.SelectedItem = value.Item;
+                    _selection.SelectedPerson = value.Person;
             }
         }
 
-        public ItemViewModel ItemDetail
+        public PersonViewModel PersonDetail
         {
             get
             {
-                return _selection.SelectedItem == null
+                return _selection.SelectedPerson == null
                     ? null
-                    : new ItemViewModel(_selection.SelectedItem);
+                    : new PersonViewModel(_selection.SelectedPerson);
             }
         }
 
-        public ICommand AddItem
+        public ICommand AddPerson
         {
             get
             {
                 return MakeCommand
                     .Do(delegate
                     {
-                        _selection.SelectedItem = _document.NewItem();
+                        _selection.SelectedPerson = _addressBook.NewPerson();
                     });
             }
         }
 
-        public ICommand DeleteItem
+        public ICommand DeletePerson
         {
             get
             {
                 return MakeCommand
-                    .When(() => _selection.SelectedItem != null)
+                    .When(() => _selection.SelectedPerson != null)
                     .Do(delegate
                     {
-                        _document.DeleteItem(_selection.SelectedItem);
-                        _selection.SelectedItem = null;
+                        _addressBook.DeletePerson(_selection.SelectedPerson);
+                        _selection.SelectedPerson = null;
                     });
             }
         }
 
-        public ICommand MoveItemDown
+        public ICommand MovePersonDown
         {
             get
             {
                 return MakeCommand
                     .When(() =>
-                        _selection.SelectedItem != null &&
-                        _document.CanMoveDown(_selection.SelectedItem))
+                        _selection.SelectedPerson != null &&
+                        _addressBook.CanMoveDown(_selection.SelectedPerson))
                     .Do(delegate
                     {
-                        _document.MoveDown(_selection.SelectedItem);
+                        _addressBook.MoveDown(_selection.SelectedPerson);
                     });
             }
         }
 
-        public ICommand MoveItemUp
+        public ICommand MovePersonUp
         {
             get
             {
                 return MakeCommand
                     .When(() =>
-                        _selection.SelectedItem != null &&
-                        _document.CanMoveUp(_selection.SelectedItem))
+                        _selection.SelectedPerson != null &&
+                        _addressBook.CanMoveUp(_selection.SelectedPerson))
                     .Do(delegate
                     {
-                        _document.MoveUp(_selection.SelectedItem);
+                        _addressBook.MoveUp(_selection.SelectedPerson);
                     });
             }
         }

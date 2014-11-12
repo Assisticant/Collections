@@ -4,38 +4,38 @@ using Collections.Models;
 
 namespace Collections.ViewModels
 {
-    public class ItemHeader
+    public class PersonHeader
     {
-        private readonly Item _item;
+        private readonly Person _person;
 
-        public ItemHeader(Item item)
+        public PersonHeader(Person person)
         {
-            _item = item;
+            _person = person;
         }
 
-        public Item Item
+        public Person Person
         {
-            get { return _item; }
+            get { return _person; }
         }
 
         public string Name
         {
-            get { return _item.Name ?? "<New Item>"; }
+            get { return _person.Name ?? "<New Person>"; }
         }
 
         public override bool Equals(object obj)
         {
             if (obj == this)
                 return true;
-            ItemHeader that = obj as ItemHeader;
+            PersonHeader that = obj as PersonHeader;
             if (that == null)
                 return false;
-            return Object.Equals(this._item, that._item);
+            return Object.Equals(this._person, that._person);
         }
 
         public override int GetHashCode()
         {
-            return _item.GetHashCode();
+            return _person.GetHashCode();
         }
     }
 }
