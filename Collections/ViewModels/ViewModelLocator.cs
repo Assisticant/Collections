@@ -37,15 +37,15 @@ namespace Collections.ViewModels
 			}
 		}
 
-        public object Hello
-        {
-            get
-            {
-                return ViewModel(() => _selection.SelectedPerson == null
-                    ? null
-                    : new HelloViewModel(_selection.SelectedPerson));
-            }
-        }
+        //public object Hello
+        //{
+        //    get
+        //    {
+        //        return ViewModel(() => _selection.SelectedPerson == null
+        //            ? null
+        //            : new HelloViewModel(_selection.SelectedPerson));
+        //    }
+        //}
 
 		private AddressBook LoadAddressBook()
 		{
