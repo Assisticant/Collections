@@ -1,11 +1,6 @@
-using System;
+using Collections.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Collections.Models;
-using Assisticant;
 
 namespace Collections.ViewModels
 {
@@ -20,15 +15,9 @@ namespace Collections.ViewModels
 			_selection = selection;
         }
 
-        public IEnumerable<ItemHeader> Items
-        {
-            get
-            {
-                return
-                    from item in _document.Items
-                    select new ItemHeader(item);
-            }
-        }
+        public IEnumerable<ItemHeader> Items =>
+            from item in _document.Items
+            select new ItemHeader(item);
 
         public ItemHeader SelectedItem
         {
@@ -45,70 +34,40 @@ namespace Collections.ViewModels
             }
         }
 
-        public ItemViewModel ItemDetail
+        public ItemViewModel ItemDetail =>
+            _selection.SelectedItem == null
+                ? null
+                : new ItemViewModel(_selection.SelectedItem);
+
+        public void AddItem()
         {
-            get
-            {
-                return _selection.SelectedItem == null
-                    ? null
-                    : new ItemViewModel(_selection.SelectedItem);
-            }
+            _selection.SelectedItem = _document.NewItem();
         }
 
-        public ICommand AddItem
+        public bool CanDeleteItem => _selection.SelectedItem != null;
+
+        public void DeleteItem()
         {
-            get
-            {
-                return MakeCommand
-                    .Do(delegate
-                    {
-                        _selection.SelectedItem = _document.NewItem();
-                    });
-            }
+            _document.DeleteItem(_selection.SelectedItem);
+            _selection.SelectedItem = null;
         }
 
-        public ICommand DeleteItem
+        public bool CanMoveItemDown =>
+            _selection.SelectedItem != null &&
+            _document.CanMoveDown(_selection.SelectedItem);
+
+        public void MoveItemDown()
         {
-            get
-            {
-                return MakeCommand
-                    .When(() => _selection.SelectedItem != null)
-                    .Do(delegate
-                    {
-                        _document.DeleteItem(_selection.SelectedItem);
-                        _selection.SelectedItem = null;
-                    });
-            }
+            _document.MoveDown(_selection.SelectedItem);
         }
 
-        public ICommand MoveItemDown
-        {
-            get
-            {
-                return MakeCommand
-                    .When(() =>
-                        _selection.SelectedItem != null &&
-                        _document.CanMoveDown(_selection.SelectedItem))
-                    .Do(delegate
-                    {
-                        _document.MoveDown(_selection.SelectedItem);
-                    });
-            }
-        }
+        public bool CanMoveItemUp =>
+            _selection.SelectedItem != null &&
+            _document.CanMoveUp(_selection.SelectedItem);
 
-        public ICommand MoveItemUp
+        public void MoveItemUp()
         {
-            get
-            {
-                return MakeCommand
-                    .When(() =>
-                        _selection.SelectedItem != null &&
-                        _document.CanMoveUp(_selection.SelectedItem))
-                    .Do(delegate
-                    {
-                        _document.MoveUp(_selection.SelectedItem);
-                    });
-            }
+            _document.MoveUp(_selection.SelectedItem);
         }
     }
 }
